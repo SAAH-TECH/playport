@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PlayPort - Choose Game</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="menu-container">
+    <h1>Welcome to PlayPort!</h1>
+    <p>Choose a game to play:</p>
+    
+    <button onclick="startGame('20questions')">20 Questions</button>
+    <button onclick="startGame('riddle')">Riddle</button>
+    
+    <p id="message"></p>
+  </div>
+
+  <script src="script.js"></script>
+
+  <script>
+    function startGame(game) {
+      // Display a message based on which game is selected
+      const message = document.getElementById("message");
+
+      if (game === '20questions') {
+        message.innerText = "Starting 20 Questions... 🧩";
+        // You can link to the 20 Questions game page or code it here
+        setTimeout(() => {
+          alert("20 Questions game coming soon!");
+        }, 1000);
+      } else if (game === 'riddle') {
+        message.innerText = "Starting Riddle... 🤔";
+        // You can link to the Riddle game page or code it here
+        setTimeout(() => {
+          alert("Riddle game coming soon!");
+        }, 1000);
+      }
+    }
+  </script>
+</body>
+</html>
