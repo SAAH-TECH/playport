@@ -6,9 +6,15 @@
     <title>Game Options</title>
 </head>
 <body>
-    <h1>Choose a Game</h1>
-    <p>Welcome to Playport! Select a game to play:</p>
+    <h1>Welcome, <span id="username-display"></span>!</h1>  <!-- Username will appear here -->
+    <p>Choose a game to play:</p>
     <a href="game1.html">20 Questions</a><br>
     <a href="game2.html">Riddle Game</a><br>
+
+    <script>
+        // Display the username stored in sessionStorage
+        const username = sessionStorage.getItem("username");
+        document.getElementById("username-display").textContent = username;
+    </script>
 </body>
 </html>
