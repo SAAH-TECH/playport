@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Riddle Game</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="game-container">
+    <h1>Riddle Game</h1>
+    <p>Can you guess the answer to this riddle?</p>
+
+    <p><strong>Riddle: What has keys but can't open locks?</strong></p>
+    
+    <!-- Placeholder for riddle answer input (you can add input fields and logic later) -->
+    <input type="text" id="answer" placeholder="Type your answer here" />
+    <button onclick="checkAnswer()">Submit Answer</button>
+
+    <p id="feedback"></p>
+
+    <a href="menu.html" class="back-button">Back to Menu</a>
+  </div>
+
+  <script>
+    function checkAnswer() {
+      const answer = document.getElementById("answer").value.toLowerCase();
+      const feedback = document.getElementById("feedback");
+
+      if (answer === "piano") {
+        feedback.innerText = "Correct! 🎉";
+      } else {
+        feedback.innerText = "Try again! ❌";
+      }
+    }
+  </script>
+</body>
+</html>
