@@ -5,23 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Enter Your Name</title>
  <style>
-  body, html {
+  body {
     margin: 0;
-    padding: 0;
-    height: 100%;
-    background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fad0c4, #fbc2eb);
-    background-size: 400% 400%;
-    animation: gradientBG 10s ease infinite;
-    font-family: Arial, sans-serif;
+    overflow: hidden;
+    background: black;
+  }
+  .stars {
+    width: 2px;
+    height: 2px;
+    background: white;
+    position: absolute;
+    animation: moveStars 20s linear infinite;
   }
 
-  @keyframes gradientBG {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+  @keyframes moveStars {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(100vh); }
   }
 </style>
-
+<script>
+  for (let i = 0; i < 100; i++) {
+    const star = document.createElement('div');
+    star.className = 'stars';
+    star.style.left = Math.random() * 100 + 'vw';
+    star.style.top = Math.random() * 100 + 'vh';
+    star.style.animationDuration = 5 + Math.random() * 15 + 's';
+    document.body.appendChild(star);
+  }
+</script>
+    
 </head>
 <body>
 
