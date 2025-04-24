@@ -1,74 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>20 Questions Game</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            text-align: center;
-            padding: 50px;
-            background-color: #f0f4f8;
-        }
-        h1 {
-            color: #4CAF50;
-        }
-        .question {
-            margin: 30px 0;
-            font-size: 20px;
-        }
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            margin: 10px;
-            cursor: pointer;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>20 Questions - AI Mode</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 30px;
+    }
+    #game-box {
+      max-width: 600px;
+      margin: auto;
+      border: 2px solid #4CAF50;
+      padding: 20px;
+      border-radius: 10px;
+    }
+    button {
+      padding: 10px 20px;
+      margin: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-
-    <h1>20 Questions Game</h1>
-    <div class="question" id="question">Think of something and click "Start"</div>
+  <div id="game-box">
+    <h1>20 Questions</h1>
+    <p id="question">Think of something... Ready?</p>
     <button onclick="startGame()">Start</button>
-    <div id="choices" style="display:none;">
-        <button onclick="answer('yes')">Yes</button>
-        <button onclick="answer('no')">No</button>
-    </div>
-    <br><br>
-    <a href="game-options.html">Back to Menu</a>
+    <div id="options" style="margin-top: 20px;"></div>
+  </div>
 
-    <script>
-        const questions = [
-            "Is it a living thing?",
-            "Can it be found at home?",
-            "Is it bigger than a microwave?",
-            "Is it used daily?",
-            "Is it a machine?",
-            "Is it electronic?",
-            "Is it a pet?",
-            "Can it fly?",
-            "Is it a type of vehicle?",
-            "Is it made of metal?",
-        ];
+  <script>
+    const questions = [
+      "Is it a living thing?",
+      "Is it something you can eat?",
+      "Is it bigger than a football?",
+      "Is it found indoors?",
+      "Is it electronic?",
+      "Is it used every day?",
+      "Can it move on its own?",
+      "Is it man-made?",
+      "Does it have wheels?",
+      "Is it colorful?",
+      "Can it fly?",
+      "Is it used for work?",
+      "Is it something you wear?",
+      "Can you buy it in a store?",
+      "Is it used in school?",
+      "Is it made of metal?",
+      "Does it make noise?",
+      "Is it soft?",
+      "Is it expensive?",
+      "Do kids like it?"
+    ];
 
-        let current = 0;
+    let currentQuestion = 0;
+    const answers = [];
 
-        function startGame() {
-            current = 0;
-            document.getElementById("question").innerText = questions[current];
-            document.getElementById("choices").style.display = "block";
-        }
+    function startGame() {
+      document.getElementById("options").innerHTML = "";
+      document.querySelector("button").style.display = "none";
+      askNextQuestion();
+    }
 
-        function answer(choice) {
-            current++;
-            if (current < questions.length) {
-                document.getElementById("question").innerText = questions[current];
-            } else {
-                document.getElementById("question").innerText = "I think you're thinking of a smartphone!";
-                document.getElementById("choices").style.display = "none";
-            }
-        }
-    </script>
+    function askNextQuestion() {
+      if (currentQuestion < questions.length) {
+        document.getElementById("question").textContent = questions[currentQuestion];
+        document.getElementById("options").innerHTML = `
+          <button onclick="saveAnswer('yes')">Yes</button>
+          <button onclick="saveAnswer('no')">No</button>
+          <button onclick="saveAnswer('maybe')">Maybe</button>
+        `;
+      } else {
+        finishGame();
+      }
+    }
 
+    function saveAnswer(answer) {
+      answers.push({ question: questions[currentQuestion], answer });
+      currentQuestion++;
+      askNextQuestion();
+    }
+
+    function finishGame() {
+      document.getElementById("question").textContent = "Thanks! Based on your answers, we'll try to guess soon!";
+      document.getElementById("options").innerHTML = `<p>(AI guessing logic can be added next!)</p>`;
+    }
+  </script>
 </body>
 </html>
