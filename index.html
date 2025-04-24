@@ -1,19 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>PlayPort Login</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enter Your Name</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 100px;
+        }
+        input {
+            padding: 10px;
+            font-size: 16px;
+            margin: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+        }
+    </style>
 </head>
 <body>
-  <div class="login-container">
-    <h1>Welcome to PlayPort 🎮</h1>
-    <input type="text" id="name" placeholder="Enter your name" required />
-    <input type="password" id="password" placeholder="Enter access code" required />
-    <button onclick="login()">Enter</button>
-  </div>
 
-  <script src="script.js"></script>
+    <h1>Enter Your Name</h1>
+
+    <form id="username-form">
+        <input type="text" id="username" placeholder="Enter your name" required><br>
+        <button type="submit">Start Game</button>
+    </form>
+
+    <script>
+    document.getElementById("username-form").addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        const username = document.getElementById("username").value;
+        sessionStorage.setItem("username", username);
+        window.location.href = "game-options.html";  // Make sure this is your actual game page
+    });
+    </script>
+
 </body>
 </html>
