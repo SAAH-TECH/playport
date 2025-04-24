@@ -1,21 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>20 Questions Game</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <title>20 Questions Game</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            padding: 50px;
+            background-color: #f0f4f8;
+        }
+        h1 {
+            color: #4CAF50;
+        }
+        .question {
+            margin: 30px 0;
+            font-size: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 10px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-  <div class="game-container">
+
     <h1>20 Questions Game</h1>
-    <p>In this game, I will try to guess the object you're thinking of!</p>
-    <p>Ask yes/no questions to help me figure it out.</p>
+    <div class="question" id="question">Think of something and click "Start"</div>
+    <button onclick="startGame()">Start</button>
+    <div id="choices" style="display:none;">
+        <button onclick="answer('yes')">Yes</button>
+        <button onclick="answer('no')">No</button>
+    </div>
+    <br><br>
+    <a href="game-options.html">Back to Menu</a>
 
-    <!-- Placeholder for game functionality (add game logic later) -->
-    <p>Game functionality coming soon!</p>
+    <script>
+        const questions = [
+            "Is it a living thing?",
+            "Can it be found at home?",
+            "Is it bigger than a microwave?",
+            "Is it used daily?",
+            "Is it a machine?",
+            "Is it electronic?",
+            "Is it a pet?",
+            "Can it fly?",
+            "Is it a type of vehicle?",
+            "Is it made of metal?",
+        ];
 
-    <a href="menu.html" class="back-button">Back to Menu</a>
-  </div>
+        let current = 0;
+
+        function startGame() {
+            current = 0;
+            document.getElementById("question").innerText = questions[current];
+            document.getElementById("choices").style.display = "block";
+        }
+
+        function answer(choice) {
+            current++;
+            if (current < questions.length) {
+                document.getElementById("question").innerText = questions[current];
+            } else {
+                document.getElementById("question").innerText = "I think you're thinking of a smartphone!";
+                document.getElementById("choices").style.display = "none";
+            }
+        }
+    </script>
+
 </body>
 </html>
