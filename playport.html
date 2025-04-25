@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PlayPort - Riddles Game</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body, html {
+      height: 100%;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: white;
+      overflow: hidden;
+    }
+    .background {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(-45deg, #1e3c72, #2a5298, #1e3c72, #0f2027);
+      background-size: 400% 400%;
+      animation: gradient 15s ease infinite;
+      z-index: -1;
+    }
+    @keyframes gradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      padding: 20px;
+    }
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    input {
+      padding: 0.8rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      width: 250px;
+      margin-bottom: 1rem;
+      outline: none;
+    }
+    button {
+      padding: 0.8rem 2rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      background-color: #00bcd4;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #0097a7;
+    }
+    .game-area {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+    }
+    .riddle {
+      font-size: 1.5rem;
+      margin: 2rem 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="background"></div>
+  <div class="container">
+    <h1>Welcome to PlayPort 🎮</h1>
+    <input type="text" id="username" placeholder="Enter your name" />
+    <button onclick="startGame()">Start Playing</button>
+
+    <div class="game-area" id="gameArea">
+      <p class="riddle" id="riddleText"></p>
+      <input type="text" id="answerInput" placeholder="Your answer..." />
+      <button onclick="checkAnswer()">Submit</button>
+      <p id="result"></p>
+    </div>
+  </div>
+
+  <script>
+    const riddles = [
+      { q: "What has keys but can't open locks?", a: "keyboard" },
+      { q: "What comes once in a minute, twice in a moment, but never in a thousand years?", a: "m" },
+      { q: "The more you take, the more you leave behind. What am I?", a: "footsteps" }
+    ];
+    let currentRiddleIndex = 0;
+
+    function startGame() {
+      const name = document.getElementById('username').value.trim();
+      if (!name) {
+        alert("Please enter your name.");
+        return;
+      }
+      document.querySelector('input#username').style.display = 'none';
+      document.querySelector('button').style.display = 'none';
+      document.getElementById('gameArea').style.display = 'flex';
+      showRiddle();
+    }
+
+    function showRiddle() {
+      if (currentRiddleIndex < riddles.length) {
+        document.getElementById('riddleText').innerText = riddles[currentRiddleIndex].q;
+        document.getElementById('answerInput').value = '';
+        document.getElementById('result').innerText = '';
+      } else {
+        document.getElementById('riddleText').innerText = "You've completed all riddles! 🎉";
+        document.getElementById('answerInput').style.display = 'none';
+      }
+    }
+
+    function checkAnswer() {
+      const userAnswer = document.getElementById('answerInput').value.trim().toLowerCase();
+      if (userAnswer === riddles[currentRiddleIndex].a) {
+        document.getElementById('result').innerText = "Correct! ✅";
+        currentRiddleIndex++;
+        setTimeout(showRiddle, 1500);
+      } else {
+        document.getElementById('result').innerText = "Try again! ❌";
+      }
+    }
+  </script>
+</body>
+</html>
